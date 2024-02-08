@@ -1,0 +1,120 @@
+local OrionLib = loadstring(game:HttpGet(('https://raw.githubusercontent.com/ionlyusegithubformcmods/1-Line-Scripts/main/Mobile%20Friendly%20Orion')))()
+
+local Window = OrionLib:MakeWindow({Name = "Budgie Hub | Push the dummies", HidePremium = true, IntroEnabled = false, SaveConfig = false, ConfigFolder = "OrionTest"})
+
+local Tab = Window:MakeTab({
+                    Name = "Main",
+                    Icon = "http://www.roblox.com/asset/?id=4483345998",
+                    PremiumOnly = false
+})
+                
+Tab:AddToggle({
+	Name = "Godmode",
+	Default = false,
+	Callback = function(Value)
+		God = Value
+while God do
+task.wait()
+local LP = game.Players.LocalPlayer
+repeat wait() until LP.Character
+for i,v in pairs(LP.Backpack:GetChildren()) do
+   if v.Name == "SHIELD POTION" then
+       v.Parent = LP.Character
+   end
+end
+end
+while God do
+   task.wait()
+   for i,v in pairs (LP.Character:GetChildren()) do
+       if v.Name == "SHIELD POTION" then
+           v:Activate()
+       end
+   end
+end
+	end    
+})
+
+Tab:AddTextbox({
+	Name = "Reach sword",
+	Default = "input",
+	TextDisappear = true,
+	Callback = function(Value)
+		for i,v in pairs(game:GetService'Players'.LocalPlayer.Character:GetChildren()) do
+  if v:isA("Tool") then
+   local a = Instance.new("SelectionBox",v.Handle)
+   v.Handle.Massless = true
+   v.Handle.Transparency = 1
+   a.Adornee = v.Handle
+   v.Handle.Size = Vector3.new(Value, Value, Value) -- тут изменять
+   local selectionBox = Instance.new("SelectionBox",v.Handle)
+   selectionBox.Adornee = v.Handle
+   selectionBox.Color3 = Color3.new(0, 0.313725, 0.47451)
+  end
+ end
+	end	  
+})
+
+Tab:AddToggle({
+	Name = "Sword Auto Click",
+	Default = false,
+	Callback = function(Value)
+		Clicker = Value
+while Clicker do
+   task.wait()
+local LP = game.Players.LocalPlayer
+repeat wait() until LP.Character
+   for i,v in pairs (LP.Character:GetChildren()) do
+       if v.Name == "LinkedSword" then
+           v:Activate()
+       end
+   end
+end
+	end    
+})
+
+Tab:AddDropdown({
+	Name = "Teleport",
+	Default = "",
+	Options = {"Teleport to the top", "Vip room"},
+	Callback = function(Value)
+	if Value == "Teleport to the top" then
+        game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(-35, 5669, -27)
+   end
+   if Value == "Vip room" then
+   game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(-88, 5669, 40) 
+   end
+   end
+})
+
+Tab:AddButton({
+ Name = "Remove hats",
+ Callback = function()
+        last_pick_sin_mrazy = game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame 
+    game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(-89, 5670, 71) 
+task.wait()
+    game. Players.LocalPlayer.Character.HumanoidRootPart.CFrame = last_pick_sin_mrazy
+   end    
+})
+
+Tab:AddButton({
+ Name = "Kill all",
+ Callback = function()
+        local range = 1000
+local player = game:GetService("Players").LocalPlayer
+game:GetService("RunService").RenderStepped:Connect(function()
+    local p = game.Players:GetPlayers()
+    for i = 2, #p do local v = p[i].Character
+local tool = player.Character and player.Character:FindFirstChildOfClass("Tool")
+            if tool and tool:FindFirstChild("Handle") then
+                tool:Activate()
+                for i,v in next, v:GetChildren() do
+                    if v:IsA("BasePart") then
+                        firetouchinterest(tool.Handle,v,0)
+                        firetouchinterest(tool.Handle,v,1)
+                    end
+                end
+            end
+        end
+end)
+   end    
+})
